@@ -1,0 +1,17 @@
+.app-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: var(--header-color);
+    min-height: 10vh;
+    background: var(--header-bg);
+    top: 0px;
+    z-index: 999;
+    position: sticky;
+    min-height: 65px;
+  }
+  .app-header-link{
+      color: var(--header-color);
+  }

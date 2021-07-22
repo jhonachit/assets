@@ -1,0 +1,54 @@
+.component-filters {
+  padding-bottom: 5px !important;
+  padding-left: 5px;
+  padding-right: 5px !important;
+}
+
+.components {
+  padding-bottom: 5px !important;
+  padding-left: 5px;
+  padding-right: 5px !important;
+}
+.component-list {
+  padding-bottom: 5px !important;
+  border: 1px solid #ced4da;
+  height: 10vw;
+  overflow: auto;
+  padding-left: 5px !important;
+  padding-top: 5px !important;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-radius: 0.25rem;
+}
+.component-list-button {
+  margin-bottom: 15px;
+  padding: 0 !important;
+  border-top-width: 1 !important;
+  position: relative;
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #212529;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+.component-list-item {
+  width: 100%;
+  text-align: left;
+}
+.component-list-item-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.component-list-item-subtitle {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.component-list-item-desc {
+  font-weight: 300;
+  font-size: 10px;
+}

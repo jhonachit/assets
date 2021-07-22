@@ -1,0 +1,41 @@
+.components-content {
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: auto;
+  display: -webkit-flex;
+  flex: 1 1 auto;
+  -webkit-flex: 1 1 auto;
+  padding: 5px!important;
+
+  
+}
+
+.components-panel-left {
+  
+  width: calc(35.3945% - 5px);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  float: left;
+  overflow: auto;
+}
+.components-panel-right {
+  margin: auto;
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.components-gutter {
+  width: 10px;
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==");
+  cursor: ew-resize;
+  height: 100%;
+  float: left;
+}
