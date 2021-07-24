@@ -3,6 +3,8 @@ import HTMLReactParser from "react-html-parser";
 import DOMPurify from "dompurify";
 
 export default function VizComponent(props) {
+  
+  console.log(props.dot)
     const graph = Viz(
         props.dot,
         {
@@ -14,6 +16,7 @@ export default function VizComponent(props) {
       
   return (
     <div>
+      
       <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(graph) }} />
     </div>
   );

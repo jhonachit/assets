@@ -8,7 +8,7 @@ export const makeDot = (layers, platforms, components, relationships) => {
     .filter((layer) => showLayer(layer.idLayer, components))
     .map(
       (layer) =>
-        '{node [shape=plaint color="none" fontcolor="' +
+        ' {node [shape=plaint color="none" fontcolor="' +
         layer.color +
         '" label="' +
         layer.layer +

@@ -1,6 +1,5 @@
 import React from "react";
-import "./components.component.css"
-import { PlusCircle, Pencil, DashCircle } from "react-bootstrap-icons";
+import "./components.component.css";
 
 export default function Components(props) {
   console.log("props", props);
@@ -35,7 +34,9 @@ export default function Components(props) {
             </label>
             <datalist id="datalistOptionsLayer">
               {props.layers.map((layer) => (
-                <option key={layer.idLayer} data-value={layer.idLayer}>{layer.layer}</option>
+                <option key={layer.idLayer} data-value={layer.idLayer}>
+                  {layer.layer}
+                </option>
               ))}
             </datalist>
           </div>
@@ -78,16 +79,10 @@ export default function Components(props) {
           <div className="h5">Components</div>
 
           <div className="component-components-options-button">
-            <a
-              type="button"
-              className="btn nav-link "
-              id="dropdownMenuLink"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              options <i className="bi-three-dots-vertical"></i>
+            <a className="nav-link " href="/component">
+              <i className="bi-plus-circle"></i>
             </a>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            {/* <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <li>
                 <a className="dropdown-item" href="/component">
                   New Component
@@ -103,55 +98,109 @@ export default function Components(props) {
                   View platforms
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
         <ol className="component-list-content">
+          
           {props.components.map((component) => (
-            <button
+            
+            <div
               key={component.idComponent}
               id={component.idComponent}
-              className="list-group-item d-flex justify-content-between align-items-start btn component-list-button"
-              onClick={props.handleClickComponent.bind(this)}
+              className="list-group-item d-flex justify-content-between align-items-start component-list-button btn-group-vertical"
+              role="group"
+              aria-label="Basic radio toggle button group"
             >
-              <div key={"component-list-item" + component.idComponent} className="ms-2 me-auto component-list-item">
-                <div key={"component-list-item-title" + component.idComponent} className="component-list-item-title">
-                  {component.component}
+              <input
+                type="radio"
+                class="btn-check"
+                name="btnradio"
+                id={"btn" + component.idComponent}
+                value={component.idComponent}
+                autocomplete="off"
+                onClick={props.handleClickComponent.bind(this)}
+              />
+              <label
+                class={
+                  "btn btn-outline-primary " + (component.idComponent ===
+                  props.componentSelected
+                    ? " active"
+                    : "")
+                }
+                for={"btn" + component.idComponent}
+              >
+                <div
+                  key={"component-list-item" + component.idComponent}
+                  className="ms-2 me-auto component-list-item"
+                >
+                  <div
+                    key={"component-list-item-title" + component.idComponent}
+                    className="component-list-item-title"
+                  >
+                    {component.component}
+                  </div>
+                  <div
+                    key={"component-list-item-subtitle" + component.idComponent}
+                    className="component-list-item-subtitle"
+                  >
+                    {component.layer}
+                  </div>
+                  <div
+                    key={"component-list-item-desc" + component.idComponent}
+                    className="component-list-item-desc"
+                  >
+                    {component.platform}
+                  </div>
                 </div>
-                <div key={"component-list-item-subtitle" + component.idComponent} className="component-list-item-subtitle">
-                  {component.layer}
-                </div>
-                <div key={"component-list-item-desc" + component.idComponent} className="component-list-item-desc">{component.platform}</div>
-              </div>
-              <span className="badge bg-primary rounded-pill">14</span>
-            </button>
+              </label>
+
+              <a
+                className="nav-link m-2 component-list-item-edit btn-outline-info "
+                href={"/component/" + component.idComponent}
+              >
+                <i className="bi-pencil"></i>
+              </a>
+            </div>
           ))}
         </ol>
       </div>
       <div
-        className={"relationship " + (props.showRelationship ? "show" : "show")}
+        className={
+          "relationship " + (props.componentSelected ? "show" : "hidden")
+        }
       >
         <div className="h5">Relationship</div>
         <div className="relationship-content">
           <div className="col relationship-to-content">
-            <div>to</div>
+            <div>form</div>
+            {props.relationshipTo ?
             <div>
-              <div>to</div>
-              <div>to</div>
+              {props.relationshipTo.map((to) => (
+                <div>
+                  <div className="component-list-item-title">{to.from}</div>
+                  <div className="component-list-item-desc">
+                    {to.component}.{to.layer}.{to.platform}
+                  </div>
+                </div>
+              ))}
             </div>
+            :""}
           </div>
           <div className="col relationship-from-content ">
-            <div>from</div>
-            {/* <div>
-              {props.relationshipsFrom.map((from) => (
+            <div>To</div>
+            {props.relationshipFrom ?
+            <div>
+              {props.relationshipFrom.map((from) => (
                 <div>
-                  <div className="component-list-item-title">{from.from}</div>
+                  <div className="component-list-item-title">{from.to}</div>
                   <div className="component-list-item-desc">
                     {from.component}.{from.layer}.{from.platform}
                   </div>
                 </div>
               ))}
-            </div> */}
+            </div>
+            :""}
           </div>
         </div>
       </div>

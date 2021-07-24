@@ -19,7 +19,7 @@ export default function ComponentsView() {
   const [filterPlaform, setFilterPlatform] = useState("");
   const [filterTag, setFilterTag] = useState("");
   const [filterComponent, setFilterComponent] = useState("");
-  const [component, setComponent] = useState("");
+  const [componentSelected, setComponentSelected] = useState("");
   const [dot, setDot] = useState("");
   const [relationship, setRelationship] = useState("");
   const [relationshipFrom, setRelationshipFrom] = useState("");
@@ -29,6 +29,7 @@ export default function ComponentsView() {
 
   useEffect(() => {
     fetchComponents();
+    fetchRelationship();
   }, [filterLayer, filterPlaform]);
 
   useEffect(() => {
@@ -37,28 +38,28 @@ export default function ComponentsView() {
   }, []);
 
   useEffect(() => {
-    fetchRelationship();
-  }, [component]);
+    fetchRelationshipFrom();
+    fetchRelationshipTo();
+  }, [componentSelected]);
 
   useEffect(() => {
     fetchDot();
   }, [components]);
 
   const handleClickShowFilters = (event) => {
-    console.log(showFilters);
     setShowFilters(!showFilters);
     event.preventDefault();
-  }
+  };
 
   const handleClickComponent = (event) => {
-    setComponent(event.target.id);
+    setComponentSelected(event.target.value);
     event.preventDefault();
   };
 
   const handleChangeTag = (event) => {
     setFilterTag(event.target.value);
     event.preventDefault();
-  }
+  };
 
   const handleChangeLayer = (event) => {
     setFilterLayer(event.target.value);
@@ -95,8 +96,8 @@ export default function ComponentsView() {
         filterPlaform,
         filterTag
       );
-      console.log("componentsData", componentsData);
       setComponents(componentsData);
+      setComponentSelected("");
     } catch (err) {
       console.log(err);
     }
@@ -114,10 +115,32 @@ export default function ComponentsView() {
     try {
       const rData = listRelationship();
       setRelationship(rData);
+      
     } catch (err) {
       console.log(err);
     }
   };
+
+  const fetchRelationshipFrom = () => {
+    try {
+      const rData = listRelationshipFrom(componentSelected);
+      setRelationshipFrom(rData);
+      console.log("fetchRelationshipFrom", rData)
+      
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const fetchRelationshipTo = () => {
+    try {
+      const rData = listRelationshipTo(componentSelected);
+      setRelationshipTo(rData);
+      
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   return (
     <div className="components-content">
@@ -126,14 +149,15 @@ export default function ComponentsView() {
           layers={layers}
           platforms={platforms}
           components={components}
-          showRelationship={showRelationship}
+          componentSelected={componentSelected}
+          relationshipFrom={relationshipFrom}
+          relationshipTo={relationshipTo}
           showFilters={showFilters}
           handleChangeLayer={handleChangeLayer}
           handleChangePlatform={handleChangePlatform}
-          handleChangeTag={handleChangeTag}          
+          handleChangeTag={handleChangeTag}
           handleClickComponent={handleClickComponent}
           handleClickShowFilters={handleClickShowFilters}
-          
         ></Components>
       </div>
       <div className="components-gutter"></div>
